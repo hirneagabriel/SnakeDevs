@@ -1,8 +1,8 @@
 # SnakeDevs
 
-Comenzi inainte de rulare:
-set FLASK_APP=flaskr
-set FLASK_ENV=development
-flask init-db
-pip install -e .
+Comenzi inainte de rulare: <br />
+set FLASK_APP=flaskr <br />
+set FLASK_ENV=development<br />
+flask init-db<br />
+pip install -e .<br />
 flask run (pentru rulare)
