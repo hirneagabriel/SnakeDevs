@@ -1,7 +1,7 @@
 import functools
 
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -10,7 +10,7 @@ from flaskr.db import get_db
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-@bp.route('/register', methods=('GET', 'POST'))
+@bp.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
@@ -19,27 +19,27 @@ def register():
         error = None
 
         if not username:
-            error = 'Username is required.'
+            return jsonify({'status': 'Username is required.'}), 403
         elif not password:
-            error = 'Password is required.'
+            return jsonify({'status': 'Password is required.'}), 403
 
-        if error is None:
-            try:
-                db.execute(
-                    "INSERT INTO user (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
-                )
-                db.commit()
-            except db.IntegrityError:
-                error = f"User {username} is already registered."
-            else:
-                return redirect(url_for("auth.login"))
+        try:
+            db.execute(
+                "INSERT INTO user (username, password) VALUES (?, ?)",
+                (username, generate_password_hash(password)),
+            )
+            db.commit()
+        except db.IntegrityError:
+            return jsonify({'status': f"User {username} is already registered."}), 403
+        else:
+            return redirect(url_for("auth.login"))
 
-        flash(error)
+    return jsonify({'status': 'user registered succesfully'}), 200
 
-    return render_template('auth/register.html')
+    # return render_template('auth/register.html')
 
-@bp.route('/login', methods=('GET', 'POST'))
+
+@bp.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -51,18 +51,17 @@ def login():
         ).fetchone()
 
         if user is None:
-            error = 'Incorrect username.'
+            return jsonify({'status': 'Incorrect username.'}), 403
         elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
+            return jsonify({'status': 'Incorrect password.'}), 403
 
-        if error is None:
-            session.clear()
-            session['user_id'] = user['id']
-            return redirect(url_for('index'))
+        session.clear()
+        session['user_id'] = user['id']
+    return jsonify({'status': 'user logged in succesfully'}), 200
 
-        flash(error)
 
-    return render_template('auth/login.html')
+    # return render_template('auth/login.html')
+
 
 @bp.before_app_request
 def load_logged_in_user():
@@ -75,16 +74,18 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
+
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return jsonify({'status': 'user logged out succesfully'}), 200
+
 
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
-            return redirect(url_for('auth.login'))
+            return jsonify({'status': 'user is not authenticated'}), 403
 
         return view(**kwargs)
 
