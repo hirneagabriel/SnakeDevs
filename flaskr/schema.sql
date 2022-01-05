@@ -1,60 +1,58 @@
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
-DROP TABLE IF EXISTS temperature;
-DROP TABLE IF EXISTS rgb;
-DROP TABLE IF EXISTS timer;
-DROP TABLE IF EXISTS holiday;
-DROP TABLE IF EXISTS stock;
+drop table if exists user;
+drop table if exists post;
+drop table if exists temperature;
+drop table if exists rgb;
+drop table if exists timer;
+drop table if exists holiday;
+drop table if exists stock;
 
-
-CREATE TABLE user (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+create table user (
+  id integer primary key autoincrement,
+  username text unique not null,
+  password text not null
 );
 
-CREATE TABLE post (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+create table post (
+  id integer primary key autoincrement,
+  author_id integer not null,
+  created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   title TEXT NOT NULL,
   body TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
-CREATE TABLE temperature (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+create table temperature (
+  id integer primary key autoincrement,
   timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   value REAL NOT NULL
 );
 
-CREATE TABLE rgb (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+create table rgb (
+    id integer primary key autoincrement,
     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     red REAL NOT NULL,
     green REAL NOT NULL,
     blue REAL NOT NULL
 );
 
-CREATE TABLE timer (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+create table timer (
+  id integer primary key autoincrement,
   timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   is_closed BOOL NOT NULL DEFAULT TRUE,
-  value REAL NOT NULL
+  time REAL NOT NULL
 );
 
-CREATE TABLE holiday (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+create table holiday (
+  id integer primary key autoincrement,
   timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   is_away BOOL NOT NULL DEFAULT FALSE,
-  value REAL NOT NULL
+  days INTEGER NOT NULL
 );
 
-CREATE TABLE stock (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  product_name VARCHAR(64) NOT NULL,
-  quantity NUMERIC(5) NOT NULL,
+create table stock (
+  id integer primary key autoincrement,
+  product_name varchar(64) not null,
+  quantity numeric(5) not null,
   product_expiration_date TIMESTAMP NOT NULL,
   shelf_number NUMERIC(5) NOT NULL
-
 );
