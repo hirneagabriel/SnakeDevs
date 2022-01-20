@@ -1,7 +1,4 @@
 from db import get_db
-from flask import Blueprint
-
-bp = Blueprint('status', __name__, url_prefix='/status')
 
 
 def get_status():
