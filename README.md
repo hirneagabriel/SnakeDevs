@@ -4,6 +4,9 @@ Comenzi inainte de rulare: <br />
 set FLASK_APP=flaskr <br />
 set FLASK_ENV=development<br />
 pip install -e .<br />
+pip install flask_socketio <br />
+pip install flask_mqtt <br />
+pip install eventlet <br />
 
 Instalati mosquitto: https://mosquitto.org/download/
 
