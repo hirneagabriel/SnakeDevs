@@ -31,11 +31,12 @@ def create_app():
     global app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(SECRET_KEY='dev', )
-
+    app.config['DATABASE'] = 'C:\sqlite\db\snakedevs.db'
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
     else:
         app.config.from_mapping(test_config)
+
 
         try:
             os.makedirs(app.instance_path)
@@ -51,6 +52,8 @@ def create_app():
             thread.start()
         return 'Hello User, not World!'
 
+   # with app.app_context():
+    #    db.init_db()
     db.init_app(app)
     app.register_blueprint(auth.bp)
     app.register_blueprint(environment.bp)
@@ -73,7 +76,6 @@ def create_mqtt_app():
     app.config['MQTT_PASSWORD'] = ''  # set the password here if the broker demands authentication
     app.config['MQTT_KEEPALIVE'] = 5  # set the time interval for sending a ping to the broker to 5 seconds
     app.config['MQTT_TLS_ENABLED'] = False  # set TLS to disabled for testing purposes
-
     global mqtt
     mqtt = Mqtt(app)
     global socketio
