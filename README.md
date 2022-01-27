@@ -8,11 +8,11 @@ Instalare database windows(sqlite): <br/>
 5. Creaza un folder db in C:\sqlite   
 6. ruleza sqlite3 in cmd (asta verifica daca functioneaza sqlite)
 Prima data cand rulezi aplicatia trebuie sa faci baza de date, asa ca mai trebuie si urmatorii pasi doar odata:
-8. asigura-te ca liniile:
-<code>
+8. asigura-te ca liniile:<code>
    with app.app_context():
     db.init_db()
-   </code> nu sunt comentate in app.py
+   </code>nu sunt comentate in app.py
+
 9. Efeectuaza pasii de mai jos si ruleaza aplicatia odata
 10. comenteaza liniile mentionate mai sus
    
