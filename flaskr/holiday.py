@@ -22,9 +22,8 @@ def set_holiday():
 
         db = get_db()
         db.execute(
-            'INSERT INTO holiday (value)'
-            ' VALUES (?)',
-            (is_away, days)
+            'INSERT INTO holiday (is_away, days) VALUES (?,?)',
+            (is_away, days),
         )
         db.commit()
 

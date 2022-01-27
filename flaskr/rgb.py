@@ -25,8 +25,7 @@ def set_rgb():
 
         db = get_db()
         db.execute(
-            'INSERT INTO rgb (value)'
-            ' VALUES (?)',
+            "INSERT INTO rgb (red, green, blue) VALUES (?,?,?)",
             (red, green, blue)
         )
         db.commit()

@@ -22,9 +22,8 @@ def set_timer():
 
         db = get_db()
         db.execute(
-            'INSERT INTO timer (value)'
-            ' VALUES (?)',
-            (is_closed, time)
+            'INSERT INTO timer (is_closed, time) VALUES (?,?)',
+            (is_closed, time),
         )
         db.commit()
 

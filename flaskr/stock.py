@@ -28,15 +28,14 @@ def set_stock():
 
         db = get_db()
         db.execute(
-            'INSERT INTO stock (value)'
-            ' VALUES (?)',
-            (product_name, quantity, product_expiration_date, shelf_number)
+            'INSERT INTO stock (product_name, quantity, product_expiration_date, shelf_number) VALUES (?,?,?,?)',
+            (product_name, quantity, product_expiration_date, shelf_number),
         )
         db.commit()
 
     check = get_db().execute(
         'SELECT id, product_name, quantity, product_expiration_date, shelf_number'
-        ' FROM timer'
+        ' FROM stock'
         ' ORDER BY product_expiration_date DESC'
     ).fetchone()
     return jsonify({
