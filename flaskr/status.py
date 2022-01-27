@@ -29,7 +29,7 @@ def get_status():
     stock = get_db().execute(
         'SELECT id, product_name, quantity, product_expiration_date, shelf_number'
         ' FROM stock'
-        ' ORDER BY timestamp DESC'
+        ' ORDER BY product_expiration_date DESC'
     ).fetchone()
 
     if temperature is None:
