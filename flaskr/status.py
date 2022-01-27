@@ -60,7 +60,7 @@ def get_status():
                 'time': timer['time']
             },
             'holiday': {
-                'last_changed': holiday['changed_date'],
+                'last_changed': holiday['timestamp'],
                 'is_away': holiday['is_away'],
                 'days': holiday['days']
             },
