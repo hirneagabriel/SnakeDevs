@@ -72,3 +72,15 @@ def get_status():
             }
         }
     }
+def get_timer():
+    timer = get_db().execute(
+        'SELECT id, timestamp, is_closed, time'
+        ' FROM timer'
+        ' ORDER BY timestamp DESC'
+    ).fetchone()
+    return {'timer': {
+                'last_changed': timer['timestamp'],
+                'is_closed': timer['is_closed'],
+                'time': timer['time']
+            }
+    }

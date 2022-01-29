@@ -16,7 +16,6 @@ import timer
 import holiday
 import stock
 import temperature
-
 eventlet.monkey_patch()
 
 app = None
@@ -84,14 +83,31 @@ def create_mqtt_app():
     return mqtt
 
 
+
 def background_thread():
     count = 0
+    # is_closed, time_to_close =
+    with app.app_context():
+        message = status.get_timer()
+        timer = message["timer"]["time"]
     while True:
         time.sleep(1)
         with app.app_context():
-            message = json.dumps(status.get_status(), default=str)
         # Publish
-        mqtt.publish('python/mqtt', message)
+            if message["timer"]["is_closed"] == "False":
+                timer = timer - 1
+            else:
+                message = status.get_timer()
+                timer = message["timer"]["time"]
+            message1 = str(timer)
+            result = mqtt.publish('python/mqtt', message1)
+        # result: [0, 1]
+            ok = result[0]
+            if ok == 0:
+                print(f"Send `{message1}` to topic")
+            else:
+                print(f"Failed to send message to topic {topic}")
+
 
 
 def run_socketio_app():
