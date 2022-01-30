@@ -2,7 +2,7 @@ import pytest
 import json
 from app import create_mqtt_app, create_app
 from paho.mqtt.client import MQTT_ERR_SUCCESS
-s
+
 
 @pytest.fixture()
 def client():
