@@ -1,6 +1,8 @@
 import random
 from paho.mqtt import client as mqtt_client
-
+from db import get_db
+import app
+import  requests
 
 broker = 'localhost'
 port = 1883
@@ -25,6 +27,12 @@ def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
         print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
         result = msg.payload.decode()
+        time_to_close = float(result)
+        if time_to_close == 0:
+            pload = {'is_closed': 'True', 'time': '20'}
+            r = requests.post(url='http://localhost:5000/timer/', data=pload)
+            print(r.text)
+
 
 
 

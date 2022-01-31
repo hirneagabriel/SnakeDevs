@@ -78,9 +78,5 @@ def get_timer():
         ' FROM timer'
         ' ORDER BY timestamp DESC'
     ).fetchone()
-    return {'timer': {
-                'last_changed': timer['timestamp'],
-                'is_closed': timer['is_closed'],
-                'time': timer['time']
-            }
-    }
+    return  timer['is_closed'], timer['time']
+

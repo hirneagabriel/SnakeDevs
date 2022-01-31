@@ -88,23 +88,27 @@ def background_thread():
     count = 0
     # is_closed, time_to_close =
     with app.app_context():
-        message = status.get_timer()
-        timer = message["timer"]["time"]
+        is_closed, time_to_close = status.get_timer()
     while True:
         time.sleep(1)
         with app.app_context():
         # Publish
-            if message["timer"]["is_closed"] == "False":
-                timer = timer - 1
+            is_closed, time_to_close = status.get_timer()
+            if is_closed == "False":
+                if count == 0:
+                    time_to_close1 = time_to_close - 1
+                    count = 1
+                else:
+                    time_to_close1 = time_to_close1 - 1
+                message = str(time_to_close1)
             else:
-                message = status.get_timer()
-                timer = message["timer"]["time"]
-            message1 = str(timer)
-            result = mqtt.publish('python/mqtt', message1)
+                count = 0
+                message = str(time_to_close)
+            result = mqtt.publish('python/mqtt', message)
         # result: [0, 1]
             ok = result[0]
             if ok == 0:
-                print(f"Send `{message1}` to topic")
+                print(f"Send `{message}` to topic")
             else:
                 print(f"Failed to send message to topic {topic}")
 

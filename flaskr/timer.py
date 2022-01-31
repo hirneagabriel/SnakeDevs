@@ -9,7 +9,6 @@ bp = Blueprint('timer', __name__, url_prefix='/timer')
 
 
 @bp.route('/', methods=('GET', 'POST'))
-@login_required
 def set_timer():
     if request.method == 'POST':
         is_closed = request.form['is_closed']
