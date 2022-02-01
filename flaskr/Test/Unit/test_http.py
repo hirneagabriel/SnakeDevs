@@ -21,7 +21,7 @@ def client():
 
     :return: App for testing
     """
-    #app.config['TESTING'] = True
+    # app.config['TESTING'] = True
     local_app = create_app()
     client = local_app.test_client()
 
@@ -40,7 +40,7 @@ def test_set_auth(client):
     rv = client.post('/auth/login', data=payload, follow_redirects=True)
     res = json.loads(rv.data.decode())
     assert rv.status_code == 200
-    assert res["status"] == 'user logged in succesfully !!!'
+    assert res["status"] == 'user logged in succesfully'
 
 def test_get_temperature(client):
     login(client)
@@ -105,3 +105,8 @@ def test_set_timer(client):
     res = json.loads(rv.data.decode())
     assert rv.status_code == 200
     assert res["status"] == 'Timer successfully recorded/retrieved'
+
+def test_get_expired(client):
+    login(client)
+    request = client.get("/stock/expired")
+    assert request.status_code == 200
