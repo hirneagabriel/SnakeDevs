@@ -9,7 +9,7 @@ port = 1883
 topic = "python/mqtt"
 
 client_id = f'python-mqtt-{random.randint(0,100)}'
-timer_set = 0;
+timer_set = 0
 
 def connect_mqtt() -> mqtt_client:
     def on_connect(client, userdata, flags, rc):
