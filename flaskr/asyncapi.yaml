@@ -1,0 +1,53 @@
+asyncapi: 2.2.0
+
+info:
+  title: SnakeDevs-SmartFridge
+  version: "1.0"
+
+servers:
+  development:
+    url: tcp://localhost:1883
+    description: Mosquitto Server
+    protocol: mqtt
+
+channels:
+  temperature:
+    description: Modificare a temperaturii
+    publish:
+      message:
+        $ref: "#/components/messages/temperature"
+    subscribe:
+      message:
+        $ref: "#/components/messages/temperature"
+
+  door-sensor:
+    description: Senzor de inchidere a usii
+    publish:
+      message:
+        $ref: "#/components/messages/door-sensor"
+    subscribe:
+      message:
+        $ref: "#/components/messages/door-sensor"
+
+
+components:
+  messages:
+    temperature:
+      name: temperature
+      description: Valoarea temperaturii
+      payload:
+        type: integer
+        examples:
+          - 0
+          - 2
+          - (-1)
+
+    door-sensor:
+      name: door-sensor
+      description: Usa este inchisa/deschisa
+      payload:
+        type: boolean
+        examples:
+          - sezut: true
+
+# https://playground.asyncapi.io/
