@@ -24,10 +24,10 @@ channels:
     description: Senzor de inchidere a usii
     publish:
       message:
-        $ref: "#/components/messages/door-sensor"
+        $ref: "#/components/messages/door_status"
     subscribe:
       message:
-        $ref: "#/components/messages/door-sensor"
+        $ref: "#/components/messages/door_status"
 
 
 components:
