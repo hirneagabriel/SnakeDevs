@@ -1,5 +1,5 @@
 asyncapi: 2.2.0
-
+# pentru validare: https://playground.asyncapi.io/
 info:
   title: SnakeDevs-SmartFridge
   version: "1.0"

@@ -2,12 +2,9 @@ import pytest
 import json
 from app import create_app
 
-"""Initialize the testing environment
+# python -m pytest -v Test/Unit/test_http.py
 
-Creates an app for testing that has the configuration flag ``TESTING`` set to
-``True``.
 
-"""
 def login(client):
     payload = {'username': 'stefan', 'password': 'parola'}
     client.post('/auth/login', data=payload, follow_redirects=True)
