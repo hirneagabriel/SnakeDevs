@@ -20,14 +20,14 @@ channels:
       message:
         $ref: "#/components/messages/temperature"
 
-  door-sensor:
+  door_status:
     description: Senzor de inchidere a usii
     publish:
       message:
-        $ref: "#/components/messages/door-sensor"
+        $ref: "#/components/messages/door_status"
     subscribe:
       message:
-        $ref: "#/components/messages/door-sensor"
+        $ref: "#/components/messages/door_status"
 
 
 components:
@@ -39,13 +39,15 @@ components:
         type: integer
         examples:
           - 0
+          - 1
           - 2
-          - (-1)
 
-    door-sensor:
-      name: door-sensor
-      description: Usa este inchisa/deschisa
+    door_status:
+      name: door_status
+      description: Countdown pentru usa deschisa (daca este constant, usa este inchisa)
       payload:
         type: integer
         examples:
           - 1
+          - 10
+          - 30
