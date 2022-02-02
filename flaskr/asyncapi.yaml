@@ -16,18 +16,14 @@ channels:
     publish:
       message:
         $ref: "#/components/messages/temperature"
-    subscribe:
-      message:
-        $ref: "#/components/messages/temperature"
+
 
   door_status:
     description: Senzor de inchidere a usii
     publish:
       message:
         $ref: "#/components/messages/door_status"
-    subscribe:
-      message:
-        $ref: "#/components/messages/door_status"
+
 
 
 components:
