@@ -12,7 +12,7 @@ servers:
 
 channels:
   temperature:
-    description: Modificare a temperaturii
+    description: Valoarea temperaturii
     publish:
       message:
         $ref: "#/components/messages/temperature"
@@ -46,8 +46,6 @@ components:
       name: door-sensor
       description: Usa este inchisa/deschisa
       payload:
-        type: boolean
+        type: integer
         examples:
-          - sezut: true
-
-# https://playground.asyncapi.io/
+          - 1
