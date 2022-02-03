@@ -42,5 +42,11 @@ In loc de <code> flask run </code> folosim comanda <code> python app.py </code> 
 - Mosquitto
 - Sqlite
 
+## Testare
+**Pentru testare a fost folosit pytest
+**Comanda pentru a rula testele:
+'cd flaskr
+ python -m pytest -v'
+
 
 
