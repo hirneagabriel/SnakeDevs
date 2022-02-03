@@ -1,12 +1,12 @@
 # SnakeDevs
 
-Instalare database windows(sqlite): <br/>
+## Instalare database windows(sqlite): <br/>
 1. Descarca precompiled binaries de la https://www.sqlite.org/download.html
 2. Descarca sqlite-tools-win32-x86-3370200.zip de acolo
 3. Extrage fileurile in C:\sqlite (sa fie toate fileulire in rootul folderului)
 4. Adauga folderul la PATH in environment variables
 5. Creaza un folder db in C:\sqlite   
-6. ruleza sqlite3 in cmd (asta verifica daca functioneaza sqlite)
+6. ruleza <code> sqlite3 </code> in cmd (asta verifica daca functioneaza sqlite)
 Prima data cand rulezi aplicatia trebuie sa faci baza de date, asa ca mai trebuie si urmatorii pasi doar odata:
 8. asigura-te ca liniile:<code>
    with app.app_context():
@@ -16,20 +16,31 @@ Prima data cand rulezi aplicatia trebuie sa faci baza de date, asa ca mai trebui
 9. Efeectuaza pasii de mai jos si ruleaza aplicatia odata
 10. comenteaza liniile mentionate mai sus
    
+## Instalare mosquitto:
+https://mosquitto.org/download/ <br/>
+Din cmd rulati ca admin in folderul unde s-a instalat mosquitto comanda : <code> net start mosquitto </code> <br/>
+In loc de <code> flask run </code> folosim comanda <code> python app.py </code> ca sa mearga si MQTT  <br />
 
+## Comenzi inainte de rulare: <br />
+<code> set FLASK_APP=flaskr </code> <br />
+<code>set FLASK_ENV=development </code><br />
+<code>pip install -e . </code><br />
+<code>pip install flask_socketio </code> <br />
+<code>pip install flask_mqtt </code><br />
+<code>pip install eventlet </code><br />
 
-Comenzi inainte de rulare: <br />
-set FLASK_APP=flaskr <br />
-set FLASK_ENV=development<br />
-pip install -e .<br />
-pip install flask_socketio <br />
-pip install flask_mqtt <br />
-pip install eventlet <br />
+## Functionalitati
+- Mod de vacanta
+- Setare temperatura
+- Setare lumina ambient RGB
+- Timer pentru inchiderea usii
+- Gestionare stoc
 
-Instalati mosquitto: https://mosquitto.org/download/
-Din cmd rulati ca admin in folderul unde s-a instalat mosquitto comanda : net start mosquitto
-In loc de flask run folosim python app.py ca sa mearga si MQTT  <br />
-
+## Tehnologii folosite
+- Flask
+- MQTT
+- Mosquitto
+- Sqlite
 
 
 
