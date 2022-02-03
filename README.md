@@ -6,7 +6,7 @@
 3. Extrage fileurile in C:\sqlite (sa fie toate fileulire in rootul folderului)
 4. Adauga folderul la PATH in environment variables
 5. Creaza un folder db in C:\sqlite   
-6. ruleza sqlite3 in cmd (asta verifica daca functioneaza sqlite)
+6. ruleza <code> sqlite3 </code> in cmd (asta verifica daca functioneaza sqlite)
 Prima data cand rulezi aplicatia trebuie sa faci baza de date, asa ca mai trebuie si urmatorii pasi doar odata:
 8. asigura-te ca liniile:<code>
    with app.app_context():
@@ -29,8 +29,18 @@ In loc de <code> flask run </code> folosim comanda <code> python app.py </code> 
 <code>pip install flask_mqtt </code><br />
 <code>pip install eventlet </code><br />
 
+## Functionalitati
+- Mod de vacanta
+- Setare temperatura
+- Setare lumina ambient RGB
+- Timer pentru inchiderea usii
+- Gestionare stoc
 
-
+## Tehnologii folosite
+- Flask
+- MQTT
+- Mosquitto
+- Sqlite
 
 
 
